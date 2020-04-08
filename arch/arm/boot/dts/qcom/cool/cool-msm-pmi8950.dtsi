@@ -25,15 +25,15 @@
 		pmi8950_charger: qcom,qpnp-smbcharger {
 			qcom,iterm-ma = <200>;
 			qcom,float-voltage-mv = <4400>;
-			qcom,thermal-mitigation = <2000 700 600 0>;
+			qcom,thermal-mitigation = <2000 1500 1000 600 0>;
 			/delete-property/ qcom,parallel-usb-min-current-ma;
 			/delete-property/ qcom,parallel-usb-9v-min-current-ma;
 			/delete-property/ qcom,parallel-allowed-lowering-ma;
 			/delete-property/ qcom,charge-unknown-battery;
 			qcom,float-voltage-warm-comp = <16>;
-			qcom,fastchg-current-warm-comp = <700>;
+                        qcom,fastchg-current-ma = <2000>;
+                        qcom,fastchg-current-comp = <1200>;
 			qcom,float-voltage-cool-comp = <1>;
-			qcom,fastchg-current-cool-comp = <700>;
 			qcom,jeita-temp-hard-limit = <1>;
 			qcom,usbin-vadc = <&pmi8950_vadc>;
 

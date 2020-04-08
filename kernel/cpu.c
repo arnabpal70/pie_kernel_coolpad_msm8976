@@ -707,8 +707,7 @@ static DECLARE_BITMAP(cpu_active_bits, CONFIG_NR_CPUS) __read_mostly;
 const struct cpumask *const cpu_active_mask = to_cpumask(cpu_active_bits);
 EXPORT_SYMBOL(cpu_active_mask);
 
-void set_cpu_possible(unsigned int cpu, bool possible)
-{
+void set_cpu_possible(unsigned int cpu, bool possible) {
 	if (possible)
 		cpumask_set_cpu(cpu, to_cpumask(cpu_possible_bits));
 	else

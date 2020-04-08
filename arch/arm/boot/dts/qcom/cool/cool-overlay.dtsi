@@ -1,3 +1,4 @@
+// #include "Batterydata_CPLD403_Coslight_4000mAh_4400mv.dtsi"
 #include "cool-msm8976.dtsi"
 #include "cool-msm8976-pinctrl.dtsi"
 #include "cool-msm8976-mtp.dtsi"
@@ -12,4 +13,5 @@
 #include "cool-msm-pm8004.dtsi"
 #include "msm8976-internal-codec-mtp.dtsi"
 #include "cool-msm8976-camera-sensor-mtp.dtsi"
+#include "cool-msm-pmi8950.dtsi"
 // #include "cool-system-mount.dtsi"

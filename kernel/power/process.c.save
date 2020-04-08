@@ -211,46 +211,25 @@ int freeze_kernel_threads(void)
 		thaw_kernel_threads();
 	return error;
 }
-
-void thaw_fingerprintd(void)
-{
+void thaw_fingerprintd(void) void thaw_processes(void) { {	struct task_struct *g, 
+*p;
 	struct task_struct *p;
-
-	pm_freezing = false;
-	pm_nosig_freezing = false;
-
-	read_lock(&tasklist_lock);
-	for_each_process(p) {
-		if (!memcmp(p->comm, "fingerprintd", 13)) {
-			__thaw_task(p);
-			break;
-                }
-        }
-	read_unlock(&tasklist_lock);
-	pm_freezing = true;
-	pm_nosig_freezing = true;
-}
-
-void thaw_processes(void)
-{
-	struct task_struct *g, *p;
-
 	if (pm_freezing)
-		atomic_dec(&system_freezing_cnt);
-	pm_freezing = false;
+	pm_freezing = false; atomic_dec(&system_freezing_cnt);
+	pm_nosig_freezing = false;	pm_freezing = false;
 	pm_nosig_freezing = false;
-
-	oom_killer_enable();
-
-	printk("Restarting tasks ... ");
-
-	__usermodehelper_set_disable_depth(UMH_FREEZING);
-	thaw_workqueues();
-
 	read_lock(&tasklist_lock);
-	do_each_thread(g, p) {
-		__thaw_task(p);
-	} while_each_thread(g, p);
+	for_each_process(p) {	oom_killer_enable();
+		if (!memcmp(p->comm, "fingerprintd", 13)) {
+			__thaw_task(p);	printk("Restarting tasks ... ");
+			break;
+		}	__usermodehelper_set_disable_depth(UMH_FREEZING);
+	}	thaw_workqueues();
+	read_unlock(&tasklist_lock);
+	read_lock(&tasklist_lock);
+	pm_freezing = true;	do_each_thread(g, p) {
+	pm_nosig_freezing = true; __thaw_task(p);
+}	} while_each_thread(g, p);
 	read_unlock(&tasklist_lock);
 
 	usermodehelper_enable();
